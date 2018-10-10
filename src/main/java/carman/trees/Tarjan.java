@@ -112,7 +112,7 @@ public class Tarjan {
         setAnswers(head.left, ans);
         // root
         sets.union(head.left, head);
-        ancestorMap.put(sets.findFather(head), head); // TODO
+        ancestorMap.put(sets.findFather(head), head);
         // right
         setAnswers(head.right, ans);
         sets.union(head.right, head);
