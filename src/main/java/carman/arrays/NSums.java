@@ -1,5 +1,7 @@
 package carman.arrays;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class NSums {
@@ -17,7 +19,6 @@ public class NSums {
             System.out.println("Too short array.");
             return;
         }
-
         HashMap<Integer, Integer> subtracts = new HashMap<>();
         subtracts.put(nums[0], 0);
         for (int i = 1; i < nums.length; i++) {
@@ -29,19 +30,25 @@ public class NSums {
     }
     public void find3Sum(int[] nums, int target) {
         HashMap<Integer, Integer> knowns = new HashMap<>();
-        knowns.put(nums[0], 0);
         for (int i = 1; i < nums.length; i++) {
-            knowns.put(nums[i], i);
+            knowns.put(nums[i - 1], i - 1);
             for(int j = 2; j < nums.length; j++) {
-                int remainder = target - nums[i] + nums[j];
+                int remainder = target - nums[i] - nums[j];
                 if (knowns.containsKey(remainder)) {
-
+                    System.out.println(nums[knowns.get(remainder)] + " + " + nums[i] + " + " + nums[j] + "==" + target);
                 }
             }
         }
     }
     public static void main(String[] args) {
-        int[] nums = new int[] {1, 1 , 13, 9, -1};
-        new NSums().findWihHash(nums, 10);
+        List<Integer> array = new ArrayList<>();
+        array.add(0, 10);
+        array.add(0, 11);
+        array.add(0, 13);
+        for (Integer elem : array) {
+            System.out.println(elem);
+        }
+        int[] nums = new int[] {1, 1, 2, 8, 11, 9, -1};
+        new NSums().find3Sum(nums, 2);
     }
 }
