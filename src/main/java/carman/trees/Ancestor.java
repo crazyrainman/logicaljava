@@ -115,9 +115,11 @@ class Record2 {
         if (o1 == o2) {
             return o1;
         }
+        // o1 is left tree head
         if (map.containsKey(o1)) {
             return map.get(o1).get(o2);
         }
+        // o2 is left tree head
         if (map.containsKey(o2)) {
             return map.get(o2).get(o1);
         }
