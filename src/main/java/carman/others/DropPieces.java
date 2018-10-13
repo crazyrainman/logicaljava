@@ -16,7 +16,7 @@ public class DropPieces {
             return nLevel;
         }
         int min = Integer.MAX_VALUE;
-        for (int i = 1; i  < nLevel + 1; i++) {
+        for (int i = 1; i  <= nLevel; i++) {
             min = Math.min(min, 
             Math.max(
             process1(i - 1, kChess - 1), // i 层碎了
@@ -34,14 +34,14 @@ public class DropPieces {
             return nLevel;
         }
         int[][] dp = new int[nLevel + 1][kChess + 1]; // row[0][0:kChess] is zero
-        for (int i = 1; i != dp.length; i++) {
+        for (int i = 1; i < dp.length; i++) {
             dp[i][1] = i;
         }
         // [i][j] i <- [1, nLevel] j <- [2, kChess]
         for (int i = 1; i < dp.length; i++) {
             for (int j = 2; j < dp[0].length; j++) {
                 int min = Integer.MAX_VALUE;
-                for (int k = 1; k != i + 1; k++) { // [i][j] = min(max([k -1][j -1], [i - k][j]) k<-[1:i]
+                for (int k = 1; k <= i; k++) { // [i][j] = min(max([k -1][j -1], [i - k][j]) k<-[1:i]
                     min = Math.min(min, Math.max(dp[k - 1][j - 1], dp[i - k][j]));
                 }
                 dp[i][j] = min + 1;
