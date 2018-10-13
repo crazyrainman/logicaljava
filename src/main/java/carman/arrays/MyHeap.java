@@ -3,15 +3,15 @@ package carman.arrays;
 import java.util.Comparator;
 
 public class MyHeap<K> {
-    private Node<K> head; // 堆头节点
-    private Node<K> last; // 堆尾节点
-    private long size; // 当前堆的大小
-    private Comparator<K> comp;  // 比较器，大根堆或小根堆
+    private Node<K> head;
+    private Node<K> last;
+    private long size;
+    private Comparator<K> comp;
     public MyHeap(Comparator<K> compare) {
         head = null;
         last = null;
         size = 0;
-        comp = compare; // 基于比较器决定是大根堆还是小根堆
+        comp = compare;
     }
     public K getHead() {
         return head == null ? null : head.value;
@@ -22,7 +22,6 @@ public class MyHeap<K> {
     public boolean isEmpty() {
         return size == 0 ? true : false;
     }
-    // 添加一个新节点到堆中
     public void add(K value) {
         Node<K> newNode = new Node<K>(value);
         if (size == 0) {
@@ -31,29 +30,29 @@ public class MyHeap<K> {
             size++;
             return;
         }
+        // 一个边
         Node<K> node = last;
-        Node<K> parent = node.parent;
-        // 找到正确的位置并插入到新节点
+        Node<K> parent = node.parent; // 无论左右，找到父亲
+        // 沿着右子树往上
         while(parent != null && node != parent.left) {
             node = parent;
             parent = node.parent;
         }
         Node<K> nodeToAdd = null;
-        if (parent == null) {
-            nodeToAdd = mostLeft(head);
+        if (parent == null) { // 满树，加到下一层
+            nodeToAdd = mostLeft(head); // 根的左边界最下一个
             nodeToAdd.left = newNode;
             newNode.parent = nodeToAdd;
-        } else if (parent.right == null) {
+        } else if (parent.right == null) { // 父节点的右孩子是空
             parent.right = newNode;
             newNode.parent = parent;
-        } else {
+        } else { // 右子树最左
             nodeToAdd = mostLeft(parent.right);
             nodeToAdd.left = newNode;
             newNode.parent = nodeToAdd;
         }
         last = newNode;
-        // 建堆过程及其调整
-        headInsertModify();
+        heapInsertModify();
         size++;
     }
     public K popHead() {
@@ -68,13 +67,11 @@ public class MyHeap<K> {
             return res.value;
         }
         Node<K> oldLast = popLastAndSetPreviousLast();
-        // 如果弹出堆尾节点后， 堆的大小等于1的处理
         if (size == 1) {
             head = oldLast;
             last = oldLast;
             return res.value;
         }
-        // 如果弹出堆尾节点后， 堆的大小大于1的处理
         Node<K> headLeft = res.left;
         Node<K> headRight = res.right;
         oldLast.left = headLeft;
@@ -85,29 +82,26 @@ public class MyHeap<K> {
         if (headRight != null) {
             headRight.parent = oldLast;
         }
-        res.left = null;
         res.right = null;
+        res.left = null;
         head = oldLast;
-        // 堆heapify过程
         heapify(oldLast);
         return res.value;
     }
-    // 找到以node为头的子树中， 最左的节点
+
     private Node<K> mostLeft(Node<K> node) {
         while(node.left != null) {
             node = node.left;
         }
         return node;
     }
-    // 找到以node为头的子树中， 最右的节点
     private Node<K> mostRight(Node<K> node) {
         while(node.right != null) {
             node = node.right;
         }
         return node;
     }
-    // 建堆及其调整的过程
-    private void headInsertModify() {
+    private void heapInsertModify() {
         Node<K> node = last;
         Node<K> parent = node.parent;
         if (parent != null && comp.compare(node.value, parent.value) < 0) {
@@ -121,36 +115,37 @@ public class MyHeap<K> {
             head = head.parent;
         }
     }
-    private void heapify(Node<K> node) {
-        Node<K> left = node.left;
-        Node<K> right = node.right;
-        Node<K> most = node;
-        while(left != null) {
-            if (left != null && comp.compare(left.value, most.value) < 0) {
-                most = left;
-            }
-            if (right != null && comp.compare(right.value, most.value) < 0) {
-                most = right;
-            }
-            if (most != node) {
-                swapClosedTwoNodes(most, node);
-            } else {
-                break;
-            }
-            left = node.left;
-            right = node.right;
-            most = node;
-        }
-        if (node.parent == last) {
-            last = node;
-        }
-        while(node.parent != null) {
-            node = node.parent;
-        }
-        head = node;
-    }
-    // 交换相邻的两个节点
     private void swapClosedTwoNodes(Node<K> node, Node<K> parent) {
-        
+        if (node == null || parent == null) {
+            return;
+        }
+        Node<K> parentParent = parent.parent;
+        Node<K> parentLeft = parent.left;
+        Node<K> nodeLeft = node.left;
+        Node<K> nodeRight = node.right;
+        node.parent = parentParent;
+        if (parentParent != null) {
+            if (parent == parentParent.left) {
+                parentParent.left = node;
+            } else {
+                parentParent.right = node;
+            }
+        }
+        parent.parent = node;
+        if (nodeLeft != null) {
+            nodeLeft.parent = parent;
+        }
+        if (nodeRight != null) {
+            nodeRight.parent = parent;
+        }
+        if(node == parent.left) { // TODO : continue
+            
+        }
+    }
+    public Node<K> popLastAndSetPreviousLast() {
+        return null; // TODO: 
+    }
+    public void heapify(Node<K> node) {
+        // TODO
     }
 }
