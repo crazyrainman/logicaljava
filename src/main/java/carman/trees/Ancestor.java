@@ -16,7 +16,6 @@ public class Ancestor {
         return left != null ? left : right;
     }
 }
-
 class Record1 {
     private HashMap<Node, Node> map;
     public Record1(Node head) {
