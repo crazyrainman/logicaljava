@@ -2,12 +2,12 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - Run",
+            "name": "CodeLens (Launch) - NSums",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "carman.threads.Run",
+            "mainClass": "carman.arrays.NSums",
             "args": "",
             "projectName": "logicaljava"
         },
