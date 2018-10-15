@@ -2,6 +2,50 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - JSorts",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "carman.arrays.JSorts",
+            "args": "",
+            "projectName": "logicaljava"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HandlerT",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "carman.designs.HandlerT",
+            "args": "",
+            "projectName": "logicaljava"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SingletonT",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "carman.designs.SingletonT",
+            "args": "",
+            "projectName": "logicaljava"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PrototypeT",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "carman.designs.PrototypeT",
+            "args": "",
+            "projectName": "logicaljava"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - NSums",
             "request": "launch",
             "cwd": "${workspaceFolder}",
