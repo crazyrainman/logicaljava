@@ -18,4 +18,11 @@ public class GenRandom {
         double p = 0.83;
         return Math.random() < p ? 0 : 1;
     }
+    public int rand01() {
+        int num;
+        do {
+            num = rand01p();
+        } while(num == rand01p());
+        return num;
+    }
 }
