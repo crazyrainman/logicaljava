@@ -9,7 +9,7 @@ public class NQueene {
     }
     // i 行
     int process(int i, int[] record, int n) {
-        if (i == n) { //能走到最后
+        if (i == n) { //能走到最后, n -1 是最后一个后
             return 1;
         }
         int res = 0;
@@ -17,7 +17,6 @@ public class NQueene {
             if (isValid(record, i, j)) {
                 record[i] = j;
                 res += process(i + 1, record, n);
-                record[i] = 0;
             }
         }
         return res;
