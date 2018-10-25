@@ -73,14 +73,13 @@ public class PrintTree {
         if (head == null) {
             return;
         }
-        
+
         Deque<Node> dq = new LinkedList<>();
         int level = 1; 
         boolean lr = true;
         Node last = head; 
         Node nLast = null; 
-        dq.offerFirst(head); 
-
+        dq.offerFirst(head);
         printLevelAndOrientation(level++, lr);
         while (!dq.isEmpty()) {
             if (lr) { 
