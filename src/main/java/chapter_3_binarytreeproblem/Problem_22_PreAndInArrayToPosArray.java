@@ -14,22 +14,19 @@ public class Problem_22_PreAndInArrayToPosArray {
 		for (int i = 0; i < len; i++) {
 			map.put(in[i], i);
 		}
-		setPos(pre, 0, len - 1, in, 0, len - 1, pos, len - 1, map);
+		genPos(pre, 0, len - 1, in, 0, len - 1, pos, len - 1, map);
 		return pos;
 	}
 
-	// 从右往左依次填好后序数组s
-	// si为后序数组s该填的位置
-	// 返回值为s该填的下一个位置
-	public static int setPos(int[] p, int pi, int pj, int[] n, int ni, int nj,
-			int[] s, int si, HashMap<Integer, Integer> map) {
-		if (pi > pj) {
-			return si;
+	public static int genPos(int[] pre, int preStart, int preEnd, int[] in, int inStart, int inEnd,
+			int[] pos, int posCurr, HashMap<Integer, Integer> map) {
+		if (preStart > preEnd) {
+			return posCurr;
 		}
-		s[si--] = p[pi];
-		int i = map.get(p[pi]);
-		si = setPos(p, pj - nj + i + 1, pj, n, i + 1, nj, s, si, map);
-		return setPos(p, pi + 1, pi + i - ni, n, ni, i - 1, s, si, map);
+		pos[posCurr--] = pre[preStart];
+		int i = map.get(pre[preStart]);
+		posCurr = genPos(pre, preEnd - inEnd + i + 1, preEnd, in, i + 1, inEnd, pos, posCurr, map);
+		return genPos(pre, preStart + 1, preStart + i - inStart, in, inStart, i - 1, pos, posCurr, map);
 	}
 
 	public static void printArray(int[] arr) {
